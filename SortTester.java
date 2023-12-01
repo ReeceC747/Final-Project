@@ -6,15 +6,19 @@ public class SortTester
     {
         Random generator = new Random();
         BinaryTree bt = new BinaryTree();
+        int[] arr;
         
         /**
          * Search at 10k size
          * entries will be size/10
          */
         int size = 10000;
+        arr = new int[size];
         for(int i = 0; i < 10000; i++)
         {
-            bt.add(generator.nextInt(size/10) + 1);
+            //comment uncomment which data structure to use (array/binaryTree)
+            // bt.add(generator.nextInt(size/10) + 1);
+            // arr[i] = generator.nextInt(size/10) + 1;
         }
         /**
          * Do searches for at 10k Size
@@ -25,7 +29,5 @@ public class SortTester
          * Quick Sort X
          * Heap Sort X
          */
-        
-
     }    
 }
