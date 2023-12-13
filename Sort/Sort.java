@@ -105,6 +105,7 @@ public class Sort
         return array;
     }
 
+
     public int[] mergeSort(int[] array)
     {   
         int size = getSize(array);
@@ -263,85 +264,53 @@ public class Sort
         return sortedArray;
     }
 
-    public int[] heapSort(int[] array)
-    {
-        int interval = 0;
-        int index = 0;
-        int size = getSize(array);
-        for(int i = 0; i < size; i++)
-        {
-            int temp = array[0];
-            array[0] = array[size - (1 + interval)];
-            array[size - (1 + interval)] = temp;
-            array = sortElement(array, index, interval);
-            interval++;
+    
 
+    public int[] heapSort(int[] array) {
+        int size = getSize(array);
+    
+        // Build max heap
+        for (int i = size / 2 - 1; i >= 0; i--) 
+        {
+            heapify(array, size, i);
         }
+    
+        // Extract elements from the heap
+        for (int i = size - 1; i > 0; i--) {
+            // Swap root (maximum element) with the last element
+            int temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+    
+            // Heapify the reduced heap
+            heapify(array, i, 0);
+        }
+    
         return array;
     }
-
-    private int[] sortElement(int[] array, int index, int interval)
-    {
-        int temp;
-        boolean sorted = false;
-        while(!sorted)
-        {
-            if(hasLeft(array, index, interval) && hasRight(array, index, interval))
-            {
-                if(array[index * 2 + 1] >= array[index * 2 + 2])
-                {
-                    if(array[index] < array[index * 2 + 1])
-                    {
-                        temp = array[index];
-                        array[index] = array[index * 2 + 1];
-                        array[index * 2 + 1] = temp;
-                        index = index * 2 + 1;
-                    }
-                    else
-                    {
-                        //sorted
-                        sorted = true;
-                    }
-                    
-                }
-                else if(array[index * 2 + 1] < array[index * 2 + 2])
-                {
-                    if(array[index] < array[index * 2 + 2])
-                    {
-                        temp = array[index];
-                        array[index] = array[index * 2 + 2];
-                        array[index * 2 + 2] = temp;
-                        index = index * 2 + 2;
-                    }
-                    else
-                    {
-                        //sorted
-                        sorted = true;
-                    }
-                }
-            }
-            else if(hasLeft(array, index, interval))
-            {
-                if(array[index] < array[index * 2 + 1])
-                {
-                    temp = array[index];
-                    array[index] = array[index * 2 + 1];
-                    array[index * 2 + 1] = temp;
-                    index = index * 2 + 1;
-                }
-                else
-                {
-                    //sorted
-                    sorted = true;
-                }
-            }
-            else
-            {
-                //sorted
-                sorted = true;
-            }
+    
+    private void heapify(int[] array, int size, int root) {
+        int largest = root;
+        int left = 2 * root + 1;
+        int right = 2 * root + 2;
+    
+        if (left < size && array[left] > array[largest]) {
+            largest = left;
         }
-        return array;
+    
+        if (right < size && array[right] > array[largest]) {
+            largest = right;
+        }
+    
+        if (largest != root) {
+            // Swap root with the largest element
+            int temp = array[root];
+            array[root] = array[largest];
+            array[largest] = temp;
+    
+            // Recursively heapify the affected sub-tree
+            heapify(array, size, largest);
+        }
     }
 
     private int getSize(int[] array)
@@ -355,52 +324,23 @@ public class Sort
         }
         return size;
     }
-
-    private boolean hasLeft(int[] array, int index, int interval)
-    {
-        boolean hasChild = false;
-        try
-        {
-            if(array[index * 2 + 1] != 0 && (index * 2 + 1) < (getSize(array) - (interval + 1)))
-            {
-                hasChild = true;
-            }
-        }
-        catch(Exception outOfBoundsException)
-        {
-            hasChild = false;
-        }
-        return hasChild;
-    }
-
-    private boolean hasRight(int[] array, int index, int interval)
-    {
-        boolean hasChild = false;
-        try
-        {                                      
-            if(array[index * 2 + 2] != 0 && (index * 2 + 2) < (getSize(array) - (interval + 1)))
-            {
-                hasChild = true;
-            }
-        }
-        catch(Exception outOfBoundsException)
-        {
-            hasChild = false;
-        }
-        return hasChild;
-    }
-
+    
     public boolean validate(int[] array)
     {
         boolean inOrder = true;
         int size = getSize(array);
         for(int i = 0; i < size - 1; i++)
         {
-            if(array[i] > array[i + 1])
+            if(array[i] > array[i + 1] && array[i] != 0)
             {
                 inOrder = false;
             }
         }
         return inOrder;
     }
+
+    
+    
 }
+
+

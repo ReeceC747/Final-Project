@@ -7,7 +7,7 @@ public class SortTester
 {
     public static void main(String[] args) 
     {
-        int size = 10000;
+        int size = 2020000;
         Random generator = new Random();
         MaxHeap mh = new MaxHeap();
         int[] arr = new int[size];
@@ -20,13 +20,13 @@ public class SortTester
         for(int i = 0; i < size; i++)
         {
             //comment uncomment which data structure to use (array/maxHeap)
-            // mh.add(generator.nextInt(size) + 1);
-            arr[i] = generator.nextInt(size/10) + 1;
+            mh.add(generator.nextInt(size) + 1);
+            // arr[i] = generator.nextInt(size / 10) + 1;
         }
 
         Long startTime = System.currentTimeMillis();
 
-        arr = sort.bubbleSort(arr);
+        arr = sort.heapSort(mh.getHeap());
 
         Long endTime = System.currentTimeMillis();
 
