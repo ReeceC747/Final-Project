@@ -38,29 +38,39 @@ public class Sort
         return array;
     }
 
-    private int position = 0;
-    public int[] selectionSort(int[] array) //fix for incomplete array
+    public int[] selectionSort(int[] array)
     {
-        boolean swapped = false;
-        // if(position == 0) swapped = true;
-        int smallestIndex = position;
-        for(int i = position; i < array.length; i++)
+        int size = getSize(array);
+        int position = 0;
+
+        
+        int temp;
+        for(int i = 0; i < size; i++)
         {
-            if(array[smallestIndex] >= array[i] && array[i] != 0)
+            boolean swapped = false;
+            int smallest = array[position];
+            int smallestIndex = position;
+            for(int j = position; j < size; j++)
             {
-                smallestIndex = i;
-                swapped = true;
+                if(smallest >= array[j] && array[j] != 0)
+                {
+                    smallest = array[j];
+                    smallestIndex = j;
+                    swapped = true;
+                }
+            }
+            if(swapped)
+            {
+                temp = array[position];
+                array[position] = array[smallestIndex];
+                array[smallestIndex] = temp;
+                position++;
+            }
+            else
+            {
+                break;
             }
         }
-        if(swapped)
-        {
-            int temp = array[smallestIndex];
-            array[smallestIndex] = array[position];
-            array[position] = temp;
-            position++;
-            selectionSort(array);
-        }
-        position = 0;
         return array;
     }
 
