@@ -19,9 +19,10 @@ public class Sort
         int temp;
         for(int i = 0; i < size - 1; i++)
         {
+            boolean swapped = false;
             for(int j = 0; j < size - 1; j++)
             {
-                boolean swapped = false;
+
                 if(array[j] > array[j + 1] && array[j] != 0)
                 {
                     temp = array[j];
@@ -29,10 +30,11 @@ public class Sort
                     array[j + 1] = temp;
                     swapped = true;
                 }
-                if(!swapped)
-                {
-                    break;
-                }
+                
+            }
+            if(!swapped)
+            {
+                break;
             }
         }
         return array;
