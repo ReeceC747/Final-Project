@@ -13,22 +13,27 @@ public class Sort
      * Uses a for loop to traverse through the array minus the last value. If the current value is bigger than the one ahead of it
      * then both values will swap places and swaps will incrememnt. when the loop is finished if the method 
      */
-    public int[] bubbleSort(int[] array) //fix for incomplete array
+    public int[] bubbleSort(int[] array)
     {
-        int swaps = 0;
-        for(int i = 0; i < array.length - 1; i++)
+        int size = getSize(array);
+        int temp;
+        for(int i = 0; i < size - 1; i++)
         {
-            if(array[i] > array[i + 1] && array[i + 1] != 0)
+            for(int j = 0; j < size - 1; j++)
             {
-                int temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
-                swaps++;
+                boolean swapped = false;
+                if(array[j] > array[j + 1] && array[j] != 0)
+                {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    swapped = true;
+                }
+                if(!swapped)
+                {
+                    break;
+                }
             }
-        }
-        if(swaps > 0)
-        {
-            bubbleSort(array);
         }
         return array;
     }
