@@ -3,11 +3,6 @@ package Sort;
 public class Sort
 {
 
-    // private boolean validate(int[] array)
-    // {
-
-    // }
-
     /**
      * prints out a sorted array using a bubble sort
      * Uses a for loop to traverse through the array minus the last value. If the current value is bigger than the one ahead of it
@@ -324,7 +319,7 @@ public class Sort
         }
         return size;
     }
-    
+
     public boolean validate(int[] array)
     {
         boolean inOrder = true;
